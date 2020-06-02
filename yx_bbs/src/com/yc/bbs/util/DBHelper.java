@@ -110,6 +110,8 @@ public class DBHelper {
 	 * @return
 	 */
 	public Connection openConnection() {
+		// jdbc:mysql://127.0.0.1/yx_bbs ==> 默认3306端口
+		// jdbc:mysql://127.0.0.1:3305/yx_bbs 
 		String url = "jdbc:mysql://127.0.0.1/yx_bbs"; // 数据库的地址
 		String user = "root"; // 数据的用户
 		String password = "a";

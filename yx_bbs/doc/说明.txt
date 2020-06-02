@@ -14,6 +14,19 @@ BBS 论坛
 
 创建工程
 
+tbl_board 板块表
+tbl_user  用户表
+tbl_topic 帖子表
+tbl_reply 回帖表
+
+帖子查询功能
+ListServlet.java  Servlet类(控制器)
+TopicDao.java	  TopicDao(数据库访问类)  => DBHelper
+
+list.html		  ajax
+	1. 导入js文件     =>   java import 类
+
+
 jquery API
 https://jquery.cuishifeng.cn/
 
