@@ -1,0 +1,27 @@
+内容: B/S架构的信息管理系统
+
+技术：html + css + js + jquery + servlet + ajax + jdbc + mysql，最后演示部署到云服务器。
+
+BBS 论坛
+1. 注册
+2. 登录
+3. 帖子浏览
+4. 帖子查询
+5. 查看帖子
+6. 发表帖子和评论
+
+数据库的构建
+
+创建工程
+
+jquery API
+https://jquery.cuishifeng.cn/
+
+jquery动态创建表格
+https://www.cnblogs.com/mr-wuxiansheng/p/6363570.html
+
+jQuery 完整 ajax示例
+https://blog.csdn.net/xianhenyuan/article/details/92669817
+
+Gson 的使用
+https://www.cnblogs.com/qinxu/p/9504412.html
