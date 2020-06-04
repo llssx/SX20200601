@@ -33,8 +33,14 @@ public class AddTopicServlet extends HttpServlet {
 		Map<String,Object> user = 
 			(Map<String, Object>) request.getSession().getAttribute("loginedUser");
 		
+		// 判断用户对象是否存在, 表示是否登录
+		if(user == null) {
+			response.getWriter().print("请先登录系统");
+			return;
+		}
+		
 		String uid = ""+user.get("uid"); // 获取用户ID
-
+		
 		if (title == null || title.trim().isEmpty()) {
 			response.getWriter().print("请填写帖子标题");
 		} else if (content == null || content.trim().isEmpty()) {
