@@ -20,6 +20,10 @@ public class DetailServlet extends HttpServlet {
 	private TopicDao tDao = new TopicDao();
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 解决乱码问题
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		// 通过 topicid 帖子id 查询帖子信息和回帖信息
 		String topicid = request.getParameter("topicid");
 		List<Map<String,Object>> list = tDao.queryByDetail(topicid);

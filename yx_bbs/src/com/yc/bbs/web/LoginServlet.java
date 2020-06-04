@@ -1,6 +1,8 @@
 package com.yc.bbs.web;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,9 +27,10 @@ public class LoginServlet extends HttpServlet {
 		String uname = request.getParameter("uname");
 		String upass = request.getParameter("upass");
 
-		if (udao.selectByLogin(uname, upass)) {
+		Map<String,Object> user = udao.selectByLogin(uname, upass);
+		if (user != null) {
 			// 登录成功之后, 要将用户名保存到会话对象
-			request.getSession().setAttribute("loginedUser", uname);
+			request.getSession().setAttribute("loginedUser", user);
 			response.getWriter().print("登录成功");
 		} else {
 			response.getWriter().print("用户名或密码错误");

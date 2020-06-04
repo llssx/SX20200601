@@ -33,7 +33,7 @@
 <br/>
 <!--      新帖        -->
 	<DIV>
-		<A href="post.html"><IMG src="image/post.gif" name="td_post" border="0" id=td_post></A>
+		<A id="addTopic" href="topic.html"><IMG src="image/post.gif" name="td_post" border="0" id=td_post></A>
 	</DIV>
 <!--         翻 页         -->
 	<DIV>
@@ -58,7 +58,7 @@
 			<TR v-for=" t in list " class="tr3">
 				<TD><IMG src="image/topic.gif" border=0></TD>
 				<TD style="FONT-SIZE: 15px">
-					<A href="detail.html">{{t.title}}</A>
+					<A v-bind:href="'detail.html#'+t.topicid">{{t.title}}</A>
 				</TD>
 				<TD align="center">{{t.uid}}</TD>
 				<TD align="center">2</TD>
@@ -75,6 +75,7 @@
 			created : function(){
 				// js 中有一个 location 对象(地址对象) , 其中有个属性叫hash, 浏览器地址中的锚点
 				var boardid = location.hash.substring(1) ;
+				addTopic.href = "topic.html#" + boardid
 				// ajax远程调动 ListSevlet doGet 方法, 或数据
 				var url = "ListServlet?boardid="+boardid;
 				$.get(url, null, function(json){  // 匿名函数

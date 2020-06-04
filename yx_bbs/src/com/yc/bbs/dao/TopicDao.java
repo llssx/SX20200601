@@ -23,7 +23,7 @@ public class TopicDao {
 				"	*\n" +
 				"FROM\n" +
 				"	tbl_topic a\n" +
-				"JOIN tbl_user b ON a.uid = b.uid\n" +
+				"left JOIN tbl_user b ON a.uid = b.uid\n" +
 				"WHERE\n" +
 				"	topicid = ?\n" +
 				"UNION ALL\n" +
@@ -31,10 +31,23 @@ public class TopicDao {
 				"		*\n" +
 				"	FROM\n" +
 				"		tbl_reply a\n" +
-				"	JOIN tbl_user b ON a.uid = b.uid\n" +
+				"	left JOIN tbl_user b ON a.uid = b.uid\n" +
 				"	WHERE\n" +
 				"		topicid = ?" ;
 		return new DBHelper().query(sql, topicid, topicid);
+	}
+	
+	/**
+	 * 发表帖子
+	 * @param title
+	 * @param content
+	 * @param uid
+	 * @param boardid
+	 */
+	public void insert(String title, String content, String uid, String boardid) {
+		String sql = "insert into tbl_topic values(null,?,?,now(),null,?,?)";
+		DBHelper dbh = new DBHelper();
+		dbh.update(sql, title, content, uid, boardid);
 	}
 	
 }

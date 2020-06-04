@@ -16,7 +16,7 @@
 <!--      用户信息、登录、注册        -->
 
 <DIV class="h">
-	<span v-if="loginedUser != '' ">欢迎 {{loginedUser}}</span>
+	<span v-if="loginedUser != '' ">欢迎 {{loginedUser.uname}}</span>
 	<span v-else>您尚未　<a href="login.html">登录</a></span>
 	&nbsp;| &nbsp; <A href="reg.html">注册</A> |
 </DIV>
@@ -31,7 +31,7 @@ var vue1 = new Vue({
 		var url = "GetLoginedUserServlet";
 		$.post(url, null, function(data){
 			// 获取登录的用户名
-			vue1.$data.loginedUser = data;
+			vue1.$data.loginedUser = JSON.parse(data);
 		});
 	}
 });
@@ -73,7 +73,7 @@ var vue1 = new Vue({
 			<TR class="tr1">
 				<TH style="WIDTH: 20%">
 					<B>{{t.uname}}</B><BR/>
-					<image v-bind:src="'image/head/' + t.head"/><BR/>
+					<image v-bind:src=" 'image/head/' + t.head"/><BR/>
 					注册:{{t.regtime}}<BR/>
 				</TH>
 				<TH>
