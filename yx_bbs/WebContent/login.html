@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <TITLE>论坛--登录</TITLE>
 <Link rel="stylesheet" type="text/css" href="style/style.css"/>
-
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
 </HEAD>
 
 <BODY>
@@ -27,11 +28,37 @@
 <!--      用户登录表单        -->
 <DIV class="t" style="MARGIN-TOP: 15px" align="center">
 	<FORM name="loginForm" action="" method="post">
-		<br/>用户名 &nbsp;<INPUT class="input" tabIndex="1"  type="text"      maxLength="20" size="35" name="uName">
-		<br/>密　码 &nbsp;<INPUT class="input" tabIndex="2"  type="password"  maxLength="20" size="40" name="uPass">
-		<br/><INPUT class="btn"  tabIndex="6"  type="submit" value="登 录">
+		<br/>用户名 &nbsp;<INPUT v-model="uname" class="input" tabIndex="1"  type="text"      maxLength="20" size="35" name="uName">
+		<br/>密　码 &nbsp;<INPUT v-model="upass" class="input" tabIndex="2"  type="password"  maxLength="20" size="40" name="uPass">
+		<br/><INPUT @click="login()" class="btn"  tabIndex="6"  type="button" value="登 录">
 	</FORM>
 </DIV>
+<script type="text/javascript">
+var vue = new Vue({
+	el : ".t",
+	data : {
+		uname : "",
+		upass : ""
+	},
+	methods : {
+		login(){
+			var url = "LoginServlet";
+			var user = {
+				uname : this.uname,   // 前面是请求参数名,  后面是vue 变量值
+				upass : this.upass,
+			}; // json 格式
+			$.post(url, user, function(msg){
+				alert(msg);
+				if(msg == '登录成功'){
+					// 跳转到首页
+					location.href = "index.html";
+				}
+			});
+		}
+	}
+});
+
+</script>
 <!--      声明        -->
 <BR/>
 <CENTER class="gray">源辰信息</CENTER>

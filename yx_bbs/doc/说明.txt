@@ -22,9 +22,14 @@ tbl_reply 回帖表
 帖子查询功能
 ListServlet.java  Servlet类(控制器)
 TopicDao.java	  TopicDao(数据库访问类)  => DBHelper
-
 list.html		  ajax
 	1. 导入js文件     =>   java import 类
+	
+	
+注册功能
+RegServlet.java  Servlet类(控制器)
+UserDao.java	  UserDao(数据库访问类)  => DBHelper
+reg.html
 
 
 jquery API
