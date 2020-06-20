@@ -74,10 +74,10 @@ var vue1 = new Vue({
 				<TH style="WIDTH: 20%">
 					<B>{{t.uname}}</B><BR/>
 					<image v-bind:src=" 'image/head/' + t.head"/><BR/>
-					注册:{{t.regtime}}<BR/>
+					注册:{{t.regtime}} <button @click="zan">赞({{ zanCnt }})</button><BR/>
 				</TH>
 				<TH>
-					<H4>{{t.title}}</H4>
+					<H4>{{t.title}} {{ t.cnt ? '浏览量:'  +  t.cnt : '' }}</H4>
 					<DIV>{{t.content}}</DIV>
 					<DIV class="tipad gray">
 						发表：[{{t.publishtime}}] &nbsp;
@@ -92,20 +92,40 @@ var vue1 = new Vue({
 var vue2 = new Vue({
 	el : "#topic",
 	data : {
-		list : []
+		list : [],
+		zanCnt : 0,
+		topicid : 0
 	},
 	// 事件钩子函数, 当创建好 vue1 对象之后, 立即执行的代码
 	created : function() {
 		// js 中有一个 location 对象(地址对象) , 其中有个属性叫hash, 浏览器地址中的锚点
-		var topicid = location.hash.substring(1) ;
+		this.topicid = location.hash.substring(1) ;
 		var url = "DetailServlet";
 		var param = {
-			topicid : topicid
+			topicid : this.topicid
 		}
+		// jquery => 对调地狱
 		$.post(url, param, function(data){
 			var list = JSON.parse(data);
 			vue2.$data.list = list;
 		});
+		
+		$.post("CntZanServlet", param, (data)=>{
+			data = JSON.parse(data);
+			this.zanCnt = data.cnt;
+		});
+	},
+	methods : {
+		zan(){
+			var param = {
+				topicid : this.topicid
+			}
+			$.post("AddZanServlet", param, (data)=>{
+				// 将 json 格式的 字符串 data 转成个js 对象
+				data = JSON.parse(data);
+				this.zanCnt = data.cnt;
+			});
+		}
 	}
 });
 
